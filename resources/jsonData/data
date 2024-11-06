@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "title": "Luxurious Apartment in Mumbai",
+        "price": 15000000,
+        "description": "A spacious 3BHK apartment in the heart of Mumbai with a sea view.",
+        "location": "Mumbai, Maharashtra",
+        "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994"
+    },
+    {
+        "id": 2,
+        "title": "Modern Villa in Bengaluru",
+        "price": 30000000,
+        "description": "A beautiful villa located in a peaceful suburb of Bengaluru with a private garden and swimming pool.",
+        "location": "Bengaluru, Karnataka",
+        "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be"
+    },
+    {
+        "id": 3,
+        "title": "Affordable 2BHK Apartment in Pune",
+        "price": 8000000,
+        "description": "A cozy 2BHK apartment ideal for small families, located near tech parks.",
+        "location": "Pune, Maharashtra",
+        "image": "https://images.unsplash.com/photo-1501183638710-841dd1904471"
+    },
+    {
+        "id": 4,
+        "title": "Independent House in Chennai",
+        "price": 12000000,
+        "description": "A cozy independent house with a garden and spacious rooms, located in a quiet residential area.",
+        "location": "Chennai, Tamil Nadu",
+        "image": "https://images.unsplash.com/photo-1599423300746-b62533397364"
+    }
+]

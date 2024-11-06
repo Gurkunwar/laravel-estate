@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Property;
+use Illuminate\Http\Request;
+
+class AdminController extends Controller
+{
+    public function property(){
+        return view('admin.property');
+    }
+
+    public function uploadproperty(Request $request){
+        $data = new Property();
+        $image = $request->file;
+        $imageName = time().'.'.$image->getClientOriginalExtension(); //it will write every img in db with a unique name using time
+        $request->file->move('propertyimage', $imageName);
+        $data->image = $imageName;
+
+        $data->title = $request->title;
+        $data->price = $request->price;
+        $data->description = $request->des;
+        $data->location = $request->location;
+
+        $data->save();
+
+        return redirect()->back()->with('message', 'Product Added Successfully');
+    }
+}
