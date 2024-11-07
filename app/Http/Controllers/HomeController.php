@@ -9,26 +9,38 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function redirect(){
+    public function redirect()
+    {
         $usertype = Auth::user()->usertype;
 
-        if($usertype == '1'){
+        if ($usertype == '1') {
             return view('admin.home');
-        }
-        else{
+        } else {
             $data = Property::paginate(3);
             return view('user.home', compact('data'));
         }
     }
 
-    public function index(){
+    public function index()
+    {
 
-        if(Auth::id()){
+        if (Auth::id()) {
             return redirect('redirect');
-        }
-        else{
+        } else {
             $data = Property::paginate(3);
             return view('user.home', compact('data'));
         }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        if($search == ''){
+            $data = Property::paginate(3);
+            return view('user.home', compact('data'));
+        }
+        $data = Property::where('title', 'Like', '%' . $search . '%')->get();
+
+        return view('user.home', compact('data'));
     }
 }

@@ -34,3 +34,5 @@ route::get('/updateview/{id}', [AdminController::class, 'updateview' ]);
 
 route::post('/updateproperty/{id}', [AdminController::class, 'updateproperty' ]);
 
+route::get('/search', [HomeController::class, 'search' ]);
+
