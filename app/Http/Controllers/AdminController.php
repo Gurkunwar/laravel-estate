@@ -40,4 +40,29 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Product Deleted Successfully');
 
     }
+    public function updateview($id){
+        $data = Property::find($id);
+
+        return view('admin.updateview', compact('data'));
+
+    }
+
+    public function updateproperty(Request $request, $id){
+        $data = Property::find($id);
+        $image = $request->file;
+        if($image){
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $request->file->move('propertyimage', $imageName);
+            $data->image = $imageName;
+        }
+
+        $data->title = $request->title;
+        $data->price = $request->price;
+        $data->description = $request->des;
+        $data->location = $request->location;
+
+        $data->save();
+
+        return redirect()->back()->with('message', 'Product Updated Successfully');
+    }
 }

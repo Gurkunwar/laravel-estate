@@ -10,6 +10,15 @@
             border: 1px solid;
             width: 20px;
             border-radius: 5px;
+            margin-left: 2rem;
+        }
+        tr {
+            margin-bottom: 10px; /* Space between rows */
+        }
+
+        /* Alternatively, add padding to the td elements */
+        td {
+            padding-bottom: 10px; /* Adds space below content in each cell */
         }
     </style>
 </head>
@@ -34,7 +43,6 @@
 
             </div>
 
-
             @endif
 
             <table>
@@ -58,7 +66,7 @@
                     <td>{{$property->price}}</td>
                     <td><img height="100" width="100" src="/propertyimage/{{$property->image}}" alt=""></td>
                     <td>
-                        <a class="btn btn-primary" href="">Update</a>
+                        <a class="btn btn-primary" href="{{url('updateview', $property->id)}}">Update</a>
                     </td>
                     <td>
                         <a class="btn btn-danger" href="{{url('deleteproperty', $property->id)}}">Delete</a>
