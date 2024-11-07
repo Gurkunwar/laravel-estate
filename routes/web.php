@@ -25,3 +25,7 @@ route::get('/', [HomeController::class, 'index' ]);
 route::get('/property', [AdminController::class, 'property' ]);
 
 route::post('/uploadproperty', [AdminController::class, 'uploadproperty' ]);
+
+route::get('/showproperty', [AdminController::class, 'showproperty' ]);
+
+route::get('/deleteproperty/{id}', [AdminController::class, 'deleteproperty' ]);

@@ -27,4 +27,17 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Product Added Successfully');
     }
+
+    public function showproperty(){
+        $data = Property::all();
+        return view('admin.showproperty', compact('data'));
+    }
+
+    public function deleteproperty($id){
+        $data = Property::find($id);
+        $data->delete();
+
+        return redirect()->back()->with('message', 'Product Deleted Successfully');
+
+    }
 }
