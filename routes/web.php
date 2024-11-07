@@ -36,3 +36,5 @@ route::post('/updateproperty/{id}', [AdminController::class, 'updateproperty' ])
 
 route::get('/search', [HomeController::class, 'search' ]);
 
+route::post('/addfavourite/{id}', [HomeController::class, 'addfavourite' ]);
+

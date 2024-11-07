@@ -25,8 +25,11 @@
                         <strong>₹{{$property->price}}</strong>
                         <p>{{$property->description}}</p>
                         <b>{{$property->location}}</b>
-
-                        <a href="#" class="btn btn-primary">Add To Favourite</a>
+            
+                        <form action="{{url('addfavourite', $property->id)}}" method="post">
+                            @csrf
+                            <input type="submit" class="btn btn-primary" value="Add To Favourite">
+                        </form>
                     </div>
                 </div>
             </div>

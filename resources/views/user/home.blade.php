@@ -82,6 +82,18 @@
             </div>
         </div>
     </nav>
+    @if (session()->has('message'))
+
+            <div class="alert alert-success">
+                {{session()->get('message')}}
+
+                <button type="button" class="close closeBtn" data-dismiss="alert">x</button>
+
+
+            </div>
+
+
+            @endif
 </header>
 
 

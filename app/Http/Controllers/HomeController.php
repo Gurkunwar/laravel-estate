@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favourite;
 use App\Models\Property;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -42,5 +43,24 @@ class HomeController extends Controller
         $data = Property::where('title', 'Like', '%' . $search . '%')->get();
 
         return view('user.home', compact('data'));
+    }
+
+    public function addfavourite(Request $request, $id){
+        if(Auth::id()){
+            $user = auth()->user();
+            $property = Property::find($id);
+            $favourite = new Favourite;
+            $favourite->name = $user->name;
+            $favourite->phone = $user->phone;
+            $favourite->address = $user->address;
+            $favourite->property_title = $property->title;
+            $favourite->property_location = $property->location;
+            $favourite->property_price = $property->price;
+            $favourite->save();
+            return redirect()->back()->with('message', 'Added To Favourites');
+        }
+        else{
+            return redirect('login');
+        }
     }
 }
