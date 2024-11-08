@@ -18,7 +18,12 @@ class HomeController extends Controller
             return view('admin.home');
         } else {
             $data = Property::paginate(3);
-            return view('user.home', compact('data'));
+
+            $user = auth()->user();
+
+            $count = Favourite::where('phone', $user->phone)->count();
+
+            return view('user.home', compact('data', 'count'));
         }
     }
 
@@ -36,7 +41,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        if($search == ''){
+        if ($search == '') {
             $data = Property::paginate(3);
             return view('user.home', compact('data'));
         }
@@ -45,8 +50,9 @@ class HomeController extends Controller
         return view('user.home', compact('data'));
     }
 
-    public function addfavourite(Request $request, $id){
-        if(Auth::id()){
+    public function addfavourite(Request $request, $id)
+    {
+        if (Auth::id()) {
             $user = auth()->user();
             $property = Property::find($id);
             $favourite = new Favourite;
@@ -58,9 +64,24 @@ class HomeController extends Controller
             $favourite->property_price = $property->price;
             $favourite->save();
             return redirect()->back()->with('message', 'Added To Favourites');
-        }
-        else{
+        } else {
             return redirect('login');
         }
     }
+
+    public function showfavourite()
+{
+    // Check if user is authenticated
+    if (!auth()->check ()) {
+        return redirect('login')->with('message', 'Please log in to view your favourites.');
+    }
+
+    $user = auth()->user();
+    $favourite = Favourite::where('phone', $user->phone)->get();
+    $count = Favourite::where('phone', $user->phone)->count();
+
+    return view('user.showfavourite', compact('count', 'favourite'));
+}
+
+    
 }

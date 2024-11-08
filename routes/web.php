@@ -38,3 +38,4 @@ route::get('/search', [HomeController::class, 'search' ]);
 
 route::post('/addfavourite/{id}', [HomeController::class, 'addfavourite' ]);
 
+Route::get('/showfavourite', [HomeController::class, 'showfavourite']);
