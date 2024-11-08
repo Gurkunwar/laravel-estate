@@ -83,5 +83,11 @@ class HomeController extends Controller
     return view('user.showfavourite', compact('count', 'favourite'));
 }
 
+public function deletefavourite($id){
+    $data = Favourite::find($id);
+    $data->delete();
+
+    return redirect()->back()->with('message', 'Removed from Favourites');
+}
     
 }

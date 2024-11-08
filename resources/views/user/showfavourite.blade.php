@@ -99,7 +99,6 @@
 
             <button type="button" class="close closeBtn" data-dismiss="alert">x</button>
 
-
         </div>
 
 
@@ -107,20 +106,22 @@
     </header>
 
     <div style="padding:100px;" align="center">
-    <table>
-        <tr style="background-color:grey;">
-            <td style="padding:10px; font-size:20px;">Property Name</td>
-            <td style="padding:10px; font-size:20px;">Location</td>
-            <td style="padding:10px; font-size:20px;">Price</td>
-        </tr>
-        @foreach ($favourite as $favourites)
-        <tr style="background-color:black;">
-            <td style="padding:10px; color:white;">{{$favourites->property_title}}</td>
-            <td style="padding:10px; color:white;">{{$favourites->property_location}}</td>
-            <td style="padding:10px; color:white;">{{$favourites->property_price}}</td>
-        </tr>
-        @endforeach
-    </table>
+        <table>
+            <tr style="background-color:grey;">
+                <td style="padding:10px; font-size:20px;">Property Name</td>
+                <td style="padding:10px; font-size:20px;">Location</td>
+                <td style="padding:10px; font-size:20px;">Price</td>
+                <td style="padding:10px; font-size:20px;">Action</td>
+            </tr>
+            @foreach ($favourite as $favourites)
+            <tr style="background-color:black;">
+                <td style="padding:10px; color:white;">{{$favourites->property_title}}</td>
+                <td style="padding:10px; color:white;">{{$favourites->property_location}}</td>
+                <td style="padding:10px; color:white;">{{$favourites->property_price}}</td>
+                <td style="padding:10px; color:white;"><a class="btn btn-danger" href="{{url('deletefavourite', $favourites->id)}}">Delete</a></td>
+            </tr>
+            @endforeach
+        </table>
     </div>
 
     <!-- Bootstrap core JavaScript -->
