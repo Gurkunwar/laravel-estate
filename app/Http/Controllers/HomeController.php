@@ -70,24 +70,75 @@ class HomeController extends Controller
     }
 
     public function showfavourite()
-{
-    // Check if user is authenticated
-    if (!auth()->check ()) {
-        return redirect('login')->with('message', 'Please log in to view your favourites.');
+    {
+        // Check if user is authenticated
+        if (!auth()->check()) {
+            return redirect('login')->with('message', 'Please log in to view your favourites.');
+        }
+
+        $user = auth()->user();
+        $favourite = Favourite::where('phone', $user->phone)->get();
+        $count = Favourite::where('phone', $user->phone)->count();
+
+        return view('user.showfavourite', compact('count', 'favourite'));
     }
 
-    $user = auth()->user();
-    $favourite = Favourite::where('phone', $user->phone)->get();
-    $count = Favourite::where('phone', $user->phone)->count();
+    public function deletefavourite($id)
+    {
+        $data = Favourite::find($id);
+        $data->delete();
 
-    return view('user.showfavourite', compact('count', 'favourite'));
-}
+        return redirect()->back()->with('message', 'Removed from Favourites');
+    }
 
-public function deletefavourite($id){
-    $data = Favourite::find($id);
-    $data->delete();
+    public function showenquiries() {}
 
-    return redirect()->back()->with('message', 'Removed from Favourites');
-}
-    
+    public function ourproperties()
+    {
+
+        $usertype = Auth::user()->usertype;
+
+        if ($usertype == '1') {
+            return view('admin.home');
+        } else {
+            $data = Property::paginate(6);
+
+            $user = auth()->user();
+
+            $count = Favourite::where('phone', $user->phone)->count();
+
+            return view('user.ourproperties', compact('data', 'count'));
+        }
+    }
+
+    public function aboutus()
+    {
+        $usertype = Auth::user()->usertype;
+
+        if ($usertype == '1') {
+            return view('admin.home');
+        } else {
+
+            $user = auth()->user();
+
+            $count = Favourite::where('phone', $user->phone)->count();
+
+            return view('user.aboutus', compact('count'));
+        }
+    }
+    public function contactus()
+    {
+        $usertype = Auth::user()->usertype;
+
+        if ($usertype == '1') {
+            return view('admin.home');
+        } else {
+
+            $user = auth()->user();
+
+            $count = Favourite::where('phone', $user->phone)->count();
+
+            return view('user.contactus', compact('count'));
+        }
+    }
 }

@@ -69,7 +69,7 @@
                         <a class="btn btn-primary" href="{{url('updateview', $property->id)}}">Update</a>
                     </td>
                     <td>
-                        <a class="btn btn-danger" href="{{url('deleteproperty', $property->id)}}">Delete</a>
+                        <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{url('deleteproperty', $property->id)}}">Delete</a>
                     </td>
                 </tr>
                 @endforeach

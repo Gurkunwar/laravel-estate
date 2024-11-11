@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <title>Sixteen Clothing HTML Template</title>
+    <title>Space Hunt</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -41,50 +41,7 @@
 
     <!-- Header -->
     <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <h2>Sixteen <em>Clothing</em></h2>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="products.html">Our Products</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-
-                        <!-- Authentication Links -->
-                        @if (Route::has('login'))
-                        @auth
-
-                        <li class="nav-item"><a class="nav-link" href="{{url('showfavourite')}}">Favourites[{{$count}}]</a></li>
-
-                        <!-- If logged in, show logout link -->
-                        <li class="nav-item">
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                            <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                        </li>
-                        @else
-                        <!-- If not logged in, show login and register links -->
-                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Log in</a></li>
-                        @if (Route::has('register'))
-                        <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a></li>
-                        @endif
-                        @endauth
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @include('user.navbar')
         @if (session()->has('message'))
 
         <div class="alert alert-success">
@@ -107,13 +64,13 @@
             <div class="banner-item-01">
                 <div class="text-content">
                     <h4>Best Offer</h4>
-                    <h2>New Arrivals On Sale</h2>
+                    <h2>New Properties On Sale</h2>
                 </div>
             </div>
             <div class="banner-item-02">
                 <div class="text-content">
                     <h4>Flash Deals</h4>
-                    <h2>Get your best products</h2>
+                    <h2>Get your best properties</h2>
                 </div>
             </div>
             <div class="banner-item-03">
@@ -133,31 +90,32 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2>About Sixteen Clothing</h2>
+                        <h2>About Space Hunt</h2>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="left-content">
-                        <h4>Looking for the best products?</h4>
-                        <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">This template</a> is free to use for your business websites. However, you have no permission to redistribute the downloadable ZIP file on any template collection website. <a rel="nofollow" href="https://templatemo.com/contact">Contact us</a> for more info.</p>
+                        <h4>Your Gateway to Prime Properties</h4>
+                        <p>Discover a curated selection of properties to suit every lifestyle and budget. At Space Hunt, we are dedicated to helping you find the perfect space—whether it's a dream home, a commercial investment, or a rental property. <a href="{{url('contactus')}}">Contact us</a> to learn more about our services and how we can help.</p>
                         <ul class="featured-list">
-                            <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                            <li><a href="#">Consectetur an adipisicing elit</a></li>
-                            <li><a href="#">It aquecorporis nulla aspernatur</a></li>
-                            <li><a href="#">Corporis, omnis doloremque</a></li>
-                            <li><a href="#">Non cum id reprehenderit</a></li>
+                            <li><a href="#">Expert-guided property search</a></li>
+                            <li><a href="#">Personalized recommendations</a></li>
+                            <li><a href="#">Exclusive listings and virtual tours</a></li>
+                            <li><a href="#">Comprehensive market insights</a></li>
+                            <li><a href="#">Dedicated customer support</a></li>
                         </ul>
-                        <a href="about.html" class="filled-button">Read More</a>
+                        <a href="{{url('aboutus')}}" class="filled-button">Read More</a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="right-image">
-                        <img src="assets/images/feature-image.jpg" alt="">
+                        <img src="assets/images/feature-image.jpg" alt="Real Estate Features">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="call-to-action">
         <div class="container">
@@ -166,11 +124,11 @@
                     <div class="inner-content">
                         <div class="row">
                             <div class="col-md-8">
-                                <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
+                                <h4>Discover Your Dream <em>Property</em> Today</h4>
+                                <p>Find unique listings tailored to your needs. From luxurious homes to smart investments, our platform connects you to prime real estate opportunities.</p>
                             </div>
                             <div class="col-md-4">
-                                <a href="#" class="filled-button">Purchase Now</a>
+                                <a href="#" class="filled-button">Explore Now</a>
                             </div>
                         </div>
                     </div>
@@ -180,16 +138,17 @@
     </div>
 
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="inner-content">
-                        <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd. - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="inner-content">
+            <p>&copy; 2024 Space Hunt Real Estate. All rights reserved.</p>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
+
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
