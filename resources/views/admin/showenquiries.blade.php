@@ -63,7 +63,8 @@
                     <td style="padding:20px;">Message</td>
                     <td style="padding:20px;">Property Title</td>
                     <td style="padding:20px;">Status</td>
-                    <td style="padding:20px;">Action</td>
+                    <td style="padding:20px;">Update</td>
+                    <td style="padding:20px;">Delete</td>
                 </tr>
                 @foreach ($enquiry as $enquiries)
                 <tr style="background-color:black;" align="center">
@@ -74,6 +75,7 @@
                     <td style="padding:20px;">{{$enquiries->property_name}}</td>
                     <td style="padding:20px;">{{$enquiries->status}}</td>
                     <td style="padding:20px;"><a href="{{url('updatestatus', $enquiries->id)}}" class="btn btn-success">Resolve</a></td>
+                    <td style="padding:20px;"><a onclick="return confirm('Are you sure?')" href="{{url('deletestatus', $enquiries->id)}}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 @endforeach
 

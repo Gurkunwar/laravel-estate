@@ -50,3 +50,5 @@ Route::get('/showenquiries', [AdminController::class, 'showenquiries']);
 Route::post('/submitenquiry/{id}', [HomeController::class, 'submitenquiry']);
 
 Route::get('/updatestatus/{id}', [AdminController::class, 'updatestatus']);
+
+Route::get('/deletestatus/{id}', [AdminController::class, 'deletestatus']);

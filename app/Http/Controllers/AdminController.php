@@ -99,4 +99,11 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Resolved Successfully');
     }
+
+    public function deletestatus($id){
+        $data = Enquiry::find($id);
+        $data->delete();
+
+        return redirect()->back()->with('message', 'Enquiry Deleted Successfully');
+    }
 }
