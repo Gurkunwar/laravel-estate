@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enquiry;
 use App\Models\Property;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class AdminController extends Controller
     public function property()
     {
         if (Auth::id()) {
-            if(Auth::user()->usertype=='1'){
+            if (Auth::user()->usertype == '1') {
 
                 return view('admin.property');
             }
@@ -75,22 +76,27 @@ class AdminController extends Controller
 
         $data->save();
 
-        return redirect()->back()->with('message', 'Product Updated Successfully');
+        return redirect()->back()->with('message', 'Property Updated Successfully');
     }
 
     public function showenquiries()
     {
-        // $enquiry = Enquiry::all();
+        $enquiry = Enquiry::all();
 
-        // return view('admin.showenquiries', compact('enquiry'));
-        return view('admin.showenquiries');
+        return view('admin.showenquiries', compact('enquiry'));
     }
 
     public function updatestatus($id)
     {
-        // $enquiry = Enquiry::find($id);
-        // $enquiry->status = 'delivered';
-        // $enquiry->save();
-        return redirect()->back();
+        $enquiry = Enquiry::find($id);
+
+        if ($enquiry->status === 'resolved') {
+            return redirect()->back()->with('message', 'Already resolved');
+        }
+
+        $enquiry->status = 'resolved';
+        $enquiry->save();
+
+        return redirect()->back()->with('message', 'Resolved Successfully');
     }
 }

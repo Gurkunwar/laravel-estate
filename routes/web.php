@@ -39,12 +39,14 @@ Route::get('/showfavourite', [HomeController::class, 'showfavourite']);
 
 Route::get('/deletefavourite/{id}', [HomeController::class, 'deletefavourite']);
 
-Route::get('/showenquiries', [AdminController::class, 'showenquiries']);
-
-Route::get('/updatestatus', [AdminController::class, 'updatestatus']);
-
 Route::get('/ourproperties', [HomeController::class, 'ourproperties']);
 
 Route::get('/aboutus', [HomeController::class, 'aboutus']);
 
 Route::get('/contactus', [HomeController::class, 'contactus']);
+
+Route::get('/showenquiries', [AdminController::class, 'showenquiries']);
+
+Route::post('/submitenquiry/{id}', [HomeController::class, 'submitenquiry']);
+
+Route::get('/updatestatus/{id}', [AdminController::class, 'updatestatus']);

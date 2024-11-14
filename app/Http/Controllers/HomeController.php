@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enquiry;
 use App\Models\Favourite;
 use App\Models\Property;
 use Illuminate\Support\Facades\Auth;
@@ -91,54 +92,78 @@ class HomeController extends Controller
         return redirect()->back()->with('message', 'Removed from Favourites');
     }
 
-    public function showenquiries() {}
-
     public function ourproperties()
     {
+        if (Auth::check()) {
+            $usertype = Auth::user()->usertype;
 
-        $usertype = Auth::user()->usertype;
-
-        if ($usertype == '1') {
-            return view('admin.home');
+            if ($usertype == '1') {
+                return view('admin.home');
+            } else {
+                $data = Property::paginate(6);
+                $user = auth()->user();
+                $count = Favourite::where('phone', $user->phone)->count();
+            }
         } else {
+            // For guests, don't calculate count
             $data = Property::paginate(6);
-
-            $user = auth()->user();
-
-            $count = Favourite::where('phone', $user->phone)->count();
-
-            return view('user.ourproperties', compact('data', 'count'));
+            $count = 0; // Set count to 0 for guests
         }
+
+        return view('user.ourproperties', compact('data', 'count'));
     }
 
     public function aboutus()
     {
-        $usertype = Auth::user()->usertype;
+        if (Auth::check()) {
+            $usertype = Auth::user()->usertype;
 
-        if ($usertype == '1') {
-            return view('admin.home');
+            if ($usertype == '1') {
+                return view('admin.home');
+            } else {
+                $user = auth()->user();
+                $count = Favourite::where('phone', $user->phone)->count();
+            }
         } else {
-
-            $user = auth()->user();
-
-            $count = Favourite::where('phone', $user->phone)->count();
-
-            return view('user.aboutus', compact('count'));
+            $count = 0;
         }
+
+        return view('user.aboutus', compact('count'));
     }
+
     public function contactus()
     {
-        $usertype = Auth::user()->usertype;
+        if (Auth::check()) {
+            $usertype = Auth::user()->usertype;
 
-        if ($usertype == '1') {
-            return view('admin.home');
+            if ($usertype == '1') {
+                return view('admin.home');
+            } else {
+                $user = auth()->user();
+                $count = Favourite::where('phone', $user->phone)->count();
+            }
         } else {
-
-            $user = auth()->user();
-
-            $count = Favourite::where('phone', $user->phone)->count();
-
-            return view('user.contactus', compact('count'));
+            $count = 0;
         }
+
+        return view('user.contactus', compact('count'));
+    }
+
+    public function showenquiries() {}
+
+    public function submitenquiry(Request $request, $id)
+    {
+        $enquiry = new Enquiry();
+        $property = Property::find($id);
+
+        $enquiry->name = $request->name;
+        $enquiry->email = $request->email;
+        $enquiry->phone = $request->phone;
+        $enquiry->message = $request->message;
+        $enquiry->property_name = $property->title;
+
+        $enquiry->save();
+
+        return redirect()->back()->with('message', 'Your enquiry has been submitted successfully.');
     }
 }
