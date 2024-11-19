@@ -106,7 +106,8 @@ class HomeController extends Controller
             }
         } else {
             // For guests, don't calculate count
-            $data = Property::paginate(6);
+            $data = Property::all();
+            // $data = Property::paginate(6);
             $count = 0; // Set count to 0 for guests
         }
 
